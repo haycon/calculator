@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <div id="main-calculator">
+
+            <p>Calculcator</p>
+
+            <div id="display-screen">
+                <p id="calculation" data-placeholder="Enter calculation" contenteditable></p>
+            </div>
+
+            <div id="buttons">
+                <button id="c" class="btn">C</button>
+                <button id="/" class="btn">/</button>
+                <button id="x" class="btn">X</button>
+                <button id="7" onclick="display()" class="btn">7</button>
+                <button id="8" onclick="display()" class="btn">8</button>
+                <button id="9" onclick="display()" class="btn">9</button>
+                <button id="-" class="btn">-</button>
+                <button id="4" onclick="display()" class="btn">4</button>
+                <button id="5" onclick="display()" class="btn">5</button>
+                <button id="6" onclick="display()" class="btn">6</button>
+                <button id="+" onclick="add"     class="btn">+</button>
+                <button id="1" onclick="display()" class="btn">1</button>
+                <button id="2" onclick="display()" class="btn">2</button>
+                <button id="3" onclick="display()" class="btn">3</button>
+                <button id="=" onclick="operate()" class="btn">=</button> 
+            </div>
+
+        </div>
+
+        <script src="script.js" async defer></script>
+    </body>
+</html>
