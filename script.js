@@ -15,8 +15,16 @@ function display(){
     calc.innerHTML += text.innerHTML
 }
 
+//Clears the values and the display screen
+function clear(){
+    console.log("hello")
+    calc.innerHTML += "x"
+    value = 0;
+    stringValue = ""
+}
+
 //Pushes numbers into an array
-function add(arr){
+function add(){
     buttonPressed = "add"
     array.push(value)
 
@@ -26,14 +34,14 @@ function add(arr){
     calc.innerHTML += " + "
 }
 
-function add2 (a,b) {
-	let sum = 0;
-	sum += a + b;
-	return sum;
-}
-
 function subtract(arr){
-    return arr.reduce((total, current) => total - current, 0)
+    buttonPressed = "subtract"
+    array.push(value)
+
+    value = 0;
+    stringValue = "";
+
+    calc.innerHTML += " - "
 }
 
 function subtract2 (a,b) {
@@ -55,6 +63,7 @@ function divide(arr){
 }
 
 //Runs the operation that is pressed
+//Should there be arguments to this function? operate(operator, numbers)
 function operate(){
     
     if(buttonPressed == "add"){
@@ -62,4 +71,11 @@ function operate(){
         let sum = array.reduce((total, current) => total + current, 0)
         calc.innerHTML = sum
     }
+
+    if(buttonPressed == "subtract"){
+        array.push(value)
+        let sum = array.reduce((total, current) => total - current, 0)
+        calc.innerHTML = sum
+    }
+
 }
