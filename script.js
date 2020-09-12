@@ -37,8 +37,7 @@ function display(){
 
 //Clears the values and the display screen
 function clean(){
-    console.log("hello")
-    calc.innerHTML += "x"
+    calc.innerHTML = " "
     value = 0;
     stringValue = ""
 }
@@ -47,20 +46,16 @@ function clean(){
 function add(){
     buttonPressed = "add"
     array.push(value)
-
     value = 0;
     stringValue = "";
-
     calc.innerHTML += " + "
 }
 
-function subtract(arr){
+function subtract(){
     buttonPressed = "subtract"
     array.push(value)
-
     value = 0;
     stringValue = "";
-
     calc.innerHTML += " - "
 }
 
@@ -100,8 +95,12 @@ function operate(){
 
     if(buttonPressed == "subtract"){
         array.push(value)
-        let sum = array.reduce((total, current) => total - current, 0)
+        let sum = array[0]
+        for(i=1; i<array.length; i++){
+            sum -= array[i]
+        }
         calc.innerHTML = sum
     }
 
 }
+
