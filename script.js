@@ -4,6 +4,26 @@ let stringValue = "";
 let array = [];
 let buttonPressed = "";
 let calc = document.getElementById("calculation")
+let buttons = document.querySelectorAll(".numbers")
+let c = document.querySelector("#c")
+let div = document.querySelector("#div")
+let x = document.querySelector("#x")
+let sub = document.querySelector("#sub")
+let addi = document.querySelector("#addi")
+let eq = document.querySelector("#eq")
+
+//Goes through the numbers and adds the display function to the numbers
+for (let btn of buttons){
+    btn.addEventListener("click", display)
+}
+
+//Add onClick event to the buttons
+c.addEventListener("click", clean)
+div.addEventListener("click", divide)
+x.addEventListener("click", multiply)
+sub.addEventListener("click", subtract)
+addi.addEventListener("click", add)
+eq.addEventListener("click", operate)
 
 //Shows numbers when pressing the buttons
 function display(){
@@ -16,7 +36,7 @@ function display(){
 }
 
 //Clears the values and the display screen
-function clear(){
+function clean(){
     console.log("hello")
     calc.innerHTML += "x"
     value = 0;
@@ -51,14 +71,20 @@ function subtract2 (a,b) {
 }
 
 function multiply(arr){
-    return arr.length 
-    ? arr.reduce((total, current) => total * current)
+    return array.length 
+    ? array.reduce((total, current) => total * current)
     : 0;
 }
 
 function divide(arr){
-    return arr.length 
-    ? arr.reduce((total, current) => total / current)
+    buttonPressed = "divide"
+    array.push(value)
+
+    value = 0;
+    stringValue = "";
+
+    calc.innerHTML += " / "
+    ? array.reduce((total, current) => total / current)
     : 0;
 }
 
