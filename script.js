@@ -1,7 +1,7 @@
 
 let value = 0;
-let stringValue = "";
 let array = [];
+let stringValue = "";
 let buttonPressed = "";
 let calc = document.getElementById("calculation")
 let buttons = document.querySelectorAll(".numbers")
@@ -11,6 +11,11 @@ let x = document.querySelector("#x")
 let sub = document.querySelector("#sub")
 let addi = document.querySelector("#addi")
 let eq = document.querySelector("#eq")
+
+//I probably need to find a better way to set up this calculator
+//I fix some of the problems with setting the value = 0
+//Not clean code
+
 
 //Goes through the numbers and adds the display function to the numbers
 for (let btn of buttons){
@@ -27,12 +32,13 @@ eq.addEventListener("click", operate)
 
 //Shows numbers when pressing the buttons
 function display(){
-
     let text = document.getElementById(event.target.id)
     
     stringValue += parseInt(text.innerHTML)
     value = parseInt(stringValue)
     calc.innerHTML += text.innerHTML
+ 
+
 }
 
 //Clears the values and the display screen
@@ -40,9 +46,10 @@ function clean(){
     calc.innerHTML = " "
     value = 0;
     stringValue = ""
+    array = []
 }
 
-//Pushes numbers into an array
+//Under are the operation functions
 function add(){
     buttonPressed = "add"
     array.push(value)
@@ -59,38 +66,37 @@ function subtract(){
     calc.innerHTML += " - "
 }
 
-function subtract2 (a,b) {
-	let sum = 0;
-	sum += a - b;
-	return sum;
-}
-
 function multiply(arr){
-    return array.length 
-    ? array.reduce((total, current) => total * current)
-    : 0;
+    buttonPressed = "multiply"
+    //Suspect there is a better way to solve this
+    if(value != 0){
+        array.push(value)
+    }
+    value = 0;
+    stringValue = "";
+    calc.innerHTML += " * "
 }
 
 function divide(arr){
     buttonPressed = "divide"
-    array.push(value)
-
+    if(value != 0){
+        array.push(value)
+    }
     value = 0;
     stringValue = "";
-
     calc.innerHTML += " / "
-    ? array.reduce((total, current) => total / current)
-    : 0;
 }
 
 //Runs the operation that is pressed
 //Should there be arguments to this function? operate(operator, numbers)
 function operate(){
-    
+    console.log(array)
     if(buttonPressed == "add"){
         array.push(value)
         let sum = array.reduce((total, current) => total + current, 0)
         calc.innerHTML = sum
+        //"Workaround", now a 0 gets pushed into the array, not a problem, but not elegant
+        value = 0
     }
 
     if(buttonPressed == "subtract"){
@@ -100,7 +106,27 @@ function operate(){
             sum -= array[i]
         }
         calc.innerHTML = sum
+        value=0
+    }
+
+    if(buttonPressed == "divide"){
+        array.push(value)
+        let sum = array.reduce((total, current) => total / current)
+        calc.innerHTML = sum
+        value = 0
+    }
+
+    if(buttonPressed == "multiply"){
+        array.push(value)
+        let sum = array.reduce((total, current) => total * current)
+        calc.innerHTML = sum
+        value = 0
     }
 
 }
+/*
+let u = [4,2]
 
+let sum = u.reduce((total, current) => total * current)
+console.log(sum)
+*/
