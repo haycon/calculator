@@ -1,10 +1,12 @@
-
+let num1 = 0;
+let num2 = 0;
+let sum = 0;
 let value = 0;
 let array = [];
 let stringValue = "";
-let buttonPressed = "";
-let calc = document.getElementById("calculation")
-let buttons = document.querySelectorAll(".numbers")
+let operation = "";
+let calc = document.getElementById("calculation");
+let numbers = document.querySelectorAll(".numbers");
 let c = document.querySelector("#c")
 let div = document.querySelector("#div")
 let x = document.querySelector("#x")
@@ -12,15 +14,18 @@ let sub = document.querySelector("#sub")
 let addi = document.querySelector("#addi")
 let eq = document.querySelector("#eq")
 
-//I probably need to find a better way to set up this calculator
-//I fix some of the problems with setting the value = 0
-//Not clean code
+//buttons.forEach(button => button.addEventListener("click", getButton));
 
-
-//Goes through the numbers and adds the display function to the numbers
-for (let btn of buttons){
-    btn.addEventListener("click", display)
+/*
+function getButton(e){
+    button = e.target;
 }
+*/
+
+console.log(numbers)
+
+//Adds onClick event, which displays which number is pressed
+numbers.forEach(a => addEventListener("click", display))
 
 //Add onClick event to the buttons
 c.addEventListener("click", clean)
@@ -28,17 +33,23 @@ div.addEventListener("click", divide)
 x.addEventListener("click", multiply)
 sub.addEventListener("click", subtract)
 addi.addEventListener("click", add)
-eq.addEventListener("click", operate)
+eq.addEventListener("click", operate(num1,num2,operation))
 
-//Shows numbers when pressing the buttons
+//Displays which numbers have been pressed
+
+//Every button has the display function now, which causes
+// Every button pressed to display in the displayfield
 function display(){
-    let text = document.getElementById(event.target.id)
-    
-    stringValue += parseInt(text.innerHTML)
+    //change name of variable
+    let numberValue = document.getElementById(event.target.id)
+    stringValue += parseInt(numberValue.innerHTML)
     value = parseInt(stringValue)
-    calc.innerHTML += text.innerHTML
- 
+    calc.innerHTML += numberValue.innerHTML
+}
 
+//A try to shorten the display function, still working here
+function updateDisplay(number){
+    text.innerHTML = x;
 }
 
 //Clears the values and the display screen
@@ -50,16 +61,21 @@ function clean(){
 }
 
 //Under are the operation functions
+function add2(a,b){
+    let ans = a+b;
+    console.log(ans)
+}
+
 function add(){
-    buttonPressed = "add"
+    operation = "add"
     array.push(value)
     value = 0;
     stringValue = "";
-    calc.innerHTML += " + "
+    //calc.innerHTML += " + "
 }
 
 function subtract(){
-    buttonPressed = "subtract"
+    operation = "subtract"
     array.push(value)
     value = 0;
     stringValue = "";
@@ -67,7 +83,7 @@ function subtract(){
 }
 
 function multiply(arr){
-    buttonPressed = "multiply"
+    operation = "multiply"
     //Suspect there is a better way to solve this
     if(value != 0){
         array.push(value)
@@ -78,7 +94,7 @@ function multiply(arr){
 }
 
 function divide(arr){
-    buttonPressed = "divide"
+    operation = "divide"
     if(value != 0){
         array.push(value)
     }
@@ -89,17 +105,16 @@ function divide(arr){
 
 //Runs the operation that is pressed
 //Should there be arguments to this function? operate(operator, numbers)
-function operate(){
-    console.log(array)
-    if(buttonPressed == "add"){
+function operate(num1,num2,operation){
+    if(operation == "add"){
         array.push(value)
-        let sum = array.reduce((total, current) => total + current, 0)
+        
         calc.innerHTML = sum
         //"Workaround", now a 0 gets pushed into the array, not a problem, but not elegant
         value = 0
     }
 
-    if(buttonPressed == "subtract"){
+    if(operation == "subtract"){
         array.push(value)
         let sum = array[0]
         for(i=1; i<array.length; i++){
@@ -109,14 +124,14 @@ function operate(){
         value=0
     }
 
-    if(buttonPressed == "divide"){
+    if(operation == "divide"){
         array.push(value)
         let sum = array.reduce((total, current) => total / current)
         calc.innerHTML = sum
         value = 0
     }
 
-    if(buttonPressed == "multiply"){
+    if(operation == "multiply"){
         array.push(value)
         let sum = array.reduce((total, current) => total * current)
         calc.innerHTML = sum
