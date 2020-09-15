@@ -22,10 +22,8 @@ function getButton(e){
 }
 */
 
-console.log(numbers)
-
 //Adds onClick event, which displays which number is pressed
-numbers.forEach(a => addEventListener("click", display))
+numbers.forEach(a => a.addEventListener("click", display))
 
 //Add onClick event to the buttons
 c.addEventListener("click", clean)
