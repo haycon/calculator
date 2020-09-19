@@ -3,6 +3,7 @@ let num2 = 0;
 let sum = 0;
 let value = 0;
 let array = [];
+let array3 = [];
 let stringValue = "";
 let operation = "";
 let calc = document.getElementById("calculation");
@@ -13,6 +14,7 @@ let x = document.querySelector("#x")
 let sub = document.querySelector("#sub")
 let addi = document.querySelector("#addi")
 let eq = document.querySelector("#eq")
+
 
 //buttons.forEach(button => button.addEventListener("click", getButton));
 
@@ -36,19 +38,26 @@ eq.addEventListener("click", operate(num1,num2,operation))
 //Displays which numbers have been pressed
 
 //Every button has the display function now, which causes
-// Every button pressed to display in the displayfield
-function display(){
-    //change name of variable
+// Every button pressed to display in the display field
+function display(button){
+    /*
     let numberValue = document.getElementById(event.target.id)
     stringValue += parseInt(numberValue.innerHTML)
-    value = parseInt(stringValue)
+    value = stringValue;
     calc.innerHTML += numberValue.innerHTML
+    */
+    let numberValue = button.target.value
+    
+    array.push(numberValue)
+    num1 = array.join("") //numberValue
+    calc.innerHTML += numberValue
+    console.log(array3)
 }
 
-//A try to shorten the display function, still working here
-function updateDisplay(number){
-    text.innerHTML = x;
-}
+
+
+//Maybe make a function which updates the display, differentiate between
+//input and display
 
 //Clears the values and the display screen
 function clean(){
@@ -66,10 +75,31 @@ function add2(a,b){
 
 function add(){
     operation = "add"
+    calc.innerHTML += " + "
+
+    if(array3[0]&&array3[1]){
+        array3[0]=array3[0]+array3[1]
+    }
+
+    if(array3[0]){
+        array3[1]=num1;
+    }else{
+        array3[0] = num1;
+    }
+
+    array = [];
+    
+    console.log(array3)
+    
+    //calc.innerHTML = result;
+
+    /*
+    operation = "add"
     array.push(value)
     value = 0;
     stringValue = "";
-    //calc.innerHTML += " + "
+    calc.innerHTML += " + "
+    */
 }
 
 function subtract(){
@@ -102,11 +132,10 @@ function divide(arr){
 }
 
 //Runs the operation that is pressed
-//Should there be arguments to this function? operate(operator, numbers)
-function operate(num1,num2,operation){
+function operate(){
+
     if(operation == "add"){
         array.push(value)
-        
         calc.innerHTML = sum
         //"Workaround", now a 0 gets pushed into the array, not a problem, but not elegant
         value = 0
@@ -137,9 +166,12 @@ function operate(num1,num2,operation){
     }
 
 }
-/*
-let u = [4,2]
 
-let sum = u.reduce((total, current) => total * current)
-console.log(sum)
-*/
+let u = [4,4,0]
+let t = u[0]
+let k = u[1]
+let s = t+k;
+u[2] = s
+console.log(u)
+//let sum = u.reduce((total, current) => total * current)
+//console.log(u)
