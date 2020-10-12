@@ -2,7 +2,8 @@ let num1 = 0;
 let num2 = 0;
 let sum = 0;
 let value = 0;
-let array = [];
+let array = [0];
+let array2 = []
 let array3 = [];
 let stringValue = "";
 let operation = "";
@@ -16,14 +17,6 @@ let addi = document.querySelector("#addi")
 let eq = document.querySelector("#eq")
 
 
-//buttons.forEach(button => button.addEventListener("click", getButton));
-
-/*
-function getButton(e){
-    button = e.target;
-}
-*/
-
 //Adds onClick event, which displays which number is pressed
 numbers.forEach(a => a.addEventListener("click", display))
 
@@ -33,81 +26,48 @@ div.addEventListener("click", divide)
 x.addEventListener("click", multiply)
 sub.addEventListener("click", subtract)
 addi.addEventListener("click", add)
-eq.addEventListener("click", operate(num1,num2,operation))
+eq.addEventListener("click", equals)
 
 //Displays which numbers have been pressed
-
-//Every button has the display function now, which causes
-// Every button pressed to display in the display field
 function display(button){
-    /*
-    let numberValue = document.getElementById(event.target.id)
-    stringValue += parseInt(numberValue.innerHTML)
-    value = stringValue;
-    calc.innerHTML += numberValue.innerHTML
-    */
     let numberValue = button.target.value
-    
-    array.push(numberValue)
-    num1 = array.join("") //numberValue
+    array[0] += numberValue
+    array[0] = parseInt(array[0])
+    //num1 = array.join("") //numberValue
     calc.innerHTML += numberValue
-    console.log(array3)
 }
-
-
-
-//Maybe make a function which updates the display, differentiate between
-//input and display
 
 //Clears the values and the display screen
 function clean(){
     calc.innerHTML = " "
-    value = 0;
-    stringValue = ""
-    array = []
+    array = [0]
+    array2 = [0]
+    console.log("array " + array)
+    console.log("array2 "+ array2)
 }
 
 //Under are the operation functions
-function add2(a,b){
-    let ans = a+b;
-    console.log(ans)
-}
-
 function add(){
     operation = "add"
     calc.innerHTML += " + "
 
-    if(array3[0]&&array3[1]){
-        array3[0]=array3[0]+array3[1]
+    if(array2[0]&&array[0]){
+        let sum = array2[0]+array[0]
+        console.log(sum)
+        array2[0]=array2[0]+array[0]
     }
 
-    if(array3[0]){
-        array3[1]=num1;
-    }else{
-        array3[0] = num1;
-    }
-
-    array = [];
+    array2.push(array[0])
     
-    console.log(array3)
-    
-    //calc.innerHTML = result;
-
-    /*
-    operation = "add"
-    array.push(value)
-    value = 0;
-    stringValue = "";
-    calc.innerHTML += " + "
-    */
+    console.log("array2 " + array2[0]) 
 }
 
 function subtract(){
     operation = "subtract"
-    array.push(value)
-    value = 0;
-    stringValue = "";
+
     calc.innerHTML += " - "
+    array2[0] -= array[0]
+    console.log(array2)
 }
 
 function multiply(arr){
@@ -129,6 +89,23 @@ function divide(arr){
     value = 0;
     stringValue = "";
     calc.innerHTML += " / "
+}
+
+//Working on this function
+function equals(){
+    if(operation = "add"){
+        let sum = array2[0]+array[0]
+        array = [0]
+        calc.innerHTML = sum
+        console.log("array2 " + array2[0])
+        console.log("array " + array[0])
+    }
+
+    if(operation = "subtraction"){
+        let sum = array2[0]-array[0]
+        calc.innerHTML = sum
+    }
+    
 }
 
 //Runs the operation that is pressed
@@ -167,11 +144,5 @@ function operate(){
 
 }
 
-let u = [4,4,0]
-let t = u[0]
-let k = u[1]
-let s = t+k;
-u[2] = s
-console.log(u)
 //let sum = u.reduce((total, current) => total * current)
 //console.log(u)
