@@ -7,6 +7,14 @@ let secondNumber = 0;
 let calc = document.getElementById('calculation');
 let numbers = document.querySelectorAll('.numbers');
 
+let var1 = document.getElementById('num1');
+let var2 = document.getElementById('num2');
+
+window.addEventListener('click', () => {
+  var1.textContent = `${firstNumber}`;
+  var2.innerHTML = `${secondNumber}`;
+});
+
 let counter = 0;
 let operation = '';
 
@@ -22,6 +30,15 @@ sub.addEventListener('click', subtract);
 addi.addEventListener('click', add);
 eq.addEventListener('click', equals);
 
+function clean() {
+  operation = '';
+  firstArray = [];
+  firstNumber = 0;
+  secondArray = [];
+  secondNumber = 0;
+  calc.innerHTML = '';
+}
+
 function display(e) {
   let buttonValue = parseInt(e.path[0].value);
 
@@ -31,37 +48,43 @@ function display(e) {
   calc.innerHTML += buttonValue;
 }
 
-function clean() {
-  firstArray = [];
-  firstNumber = 0;
-  secondArray = [];
-  secondNumber = 0;
-  calc.innerHTML = '';
-}
-
 function add() {
-  operation = 'add';
+  operation = 'addition';
   calc.innerHTML += '+';
   secondNumber += firstNumber;
   firstArray = [];
   firstNumber = 0;
-  console.log(secondNumber);
 }
 
 function subtract() {
-  operation = 'subtract';
+  operation = 'subtraction';
+  calc.innerHTML += '-';
+  secondNumber -= firstNumber;
+  firstArray = [];
+  firstNumber = 0;
 }
 
 function multiply() {
-  operation = 'multiply';
+  operation = 'multiplication';
 }
 
 function divide() {
-  operation = 'divide';
+  operation = 'division';
 }
 
 //Working on this function
 function equals() {
-  secondNumber += firstNumber;
-  calc.innerHTML = secondNumber;
+  if (operation == 'addition') {
+    secondNumber += firstNumber;
+    /*     if (firstNumber == 0) {
+      calc.innerHTML = firstNumber;
+    } */
+    calc.innerHTML = secondNumber;
+    firstNumber = 0;
+  }
+
+  if (operation == 'subtraction') {
+    secondNumber += firstNumber;
+    calc.innerHTML = secondNumber;
+  }
 }
