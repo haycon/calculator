@@ -1,20 +1,16 @@
 let num1 = 0;
+let firstArray = [];
+let firstNumber = 0;
+let secondArray = [];
+let secondNumber = 0;
 
-let stringValue = '';
-let operation = '';
-
-//Maybe I don' need to create these variables at all?
 let calc = document.getElementById('calculation');
 let numbers = document.querySelectorAll('.numbers');
-let c = document.querySelector('#c');
-let div = document.querySelector('#div');
-let x = document.querySelector('#x');
-let sub = document.querySelector('#sub');
-let addi = document.querySelector('#addi');
-let eq = document.querySelector('#eq');
 
-//Adds onClick event, which displays which number is pressed
-numbers.forEach((a) => a.addEventListener('click', display));
+let counter = 0;
+let operation = '';
+
+numbers.forEach((e) => e.addEventListener('click', display));
 
 //Add onClick event to the buttons
 
@@ -26,15 +22,30 @@ sub.addEventListener('click', subtract);
 addi.addEventListener('click', add);
 eq.addEventListener('click', equals);
 
-//Displays which numbers have been pressed
-function display(button) {}
+function display(e) {
+  let buttonValue = parseInt(e.path[0].value);
 
-//Clears the values and the display screen
-function clean() {}
+  firstArray.push(buttonValue);
+  firstNumber = parseInt(firstArray.join(''));
 
-//Under are the operation functions
+  calc.innerHTML += buttonValue;
+}
+
+function clean() {
+  firstArray = [];
+  firstNumber = 0;
+  secondArray = [];
+  secondNumber = 0;
+  calc.innerHTML = '';
+}
+
 function add() {
   operation = 'add';
+  calc.innerHTML += '+';
+  secondNumber += firstNumber;
+  firstArray = [];
+  firstNumber = 0;
+  console.log(secondNumber);
 }
 
 function subtract() {
@@ -51,6 +62,6 @@ function divide() {
 
 //Working on this function
 function equals() {
-  if ((operation = 'add')) {
-  }
+  secondNumber += firstNumber;
+  calc.innerHTML = secondNumber;
 }
