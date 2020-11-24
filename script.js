@@ -65,7 +65,7 @@ multiplication.addEventListener('click', () => {
   firstNumber = 0;
 });
 
-sub.addEventListener('click', () => {
+subtraction.addEventListener('click', () => {
   operation = 'subtraction';
   calc.innerHTML += '-';
   secondNumber -= firstNumber;
@@ -81,7 +81,7 @@ addition.addEventListener('click', () => {
   firstNumber = 0;
 });
 
-eq.addEventListener('click', () => {
+equals.addEventListener('click', () => {
   if (operation == 'addition') {
     secondNumber += firstNumber;
     calc.innerHTML = secondNumber;
