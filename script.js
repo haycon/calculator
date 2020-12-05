@@ -2,6 +2,8 @@ let num1 = 0;
 let firstArray = [];
 let firstNumber = 0;
 let secondNumber = 0;
+let firstSave = 0;
+let secondSave = 0;
 let divNumber = 0;
 let multNumber = 0;
 let operation = '';
@@ -12,37 +14,75 @@ let var1 = document.getElementById('num1');
 let var2 = document.getElementById('num2');
 let var3 = document.getElementById('num3');
 let var4 = document.getElementById('num4');
+let var5 = document.getElementById('num5');
+let var6 = document.getElementById('num6');
 
 window.addEventListener('click', () => {
-  var1.textContent = `${firstNumber}`;
-  var2.innerHTML = `${secondNumber}`;
-  var3.innerHTML = `${divNumber}`;
-  var4.innerHTML = `${multNumber}`;
+  var1.textContent = `First number ${firstNumber}`;
+  var2.innerHTML = `Second number ${secondNumber}`;
+  var3.innerHTML = `Div number ${divNumber}`;
+  var4.innerHTML = `Mult number ${multNumber}`;
+  var5.innerHTML = `First save num ${firstSave}`;
+  var6.innerHTML = `Second save num ${secondSave}`;
 });
 
 numbers.forEach((e) => e.addEventListener('click', display));
 
+//Adds number into variable when clicked
 function display(e) {
   let buttonValue = parseFloat(e.path[0].value);
 
   firstArray.push(buttonValue);
   firstNumber = parseFloat(firstArray.join(''));
 
-  if (operation == 'division') {
-  }
-
   calc.innerHTML += buttonValue;
 }
 
+//Clear
 clear.addEventListener('click', () => {
   operation = '';
   firstArray = [];
   firstNumber = 0;
-  secondArray = [];
   secondNumber = 0;
-  divNumber = 0;
-  multNumber = 0;
+  firstSave = 0;
+  secondSave = 0;
   calc.innerHTML = '';
+});
+
+addition.addEventListener('click', () => {
+  if (firstSave == 0) {
+    firstSave += firstNumber;
+  } else {
+    firstSave = eq(firstNumber, secondNumber, operation);
+  }
+  operation = 'addition';
+  calc.innerHTML += '+';
+  secondNumber = firstNumber;
+  firstArray = [];
+  firstNumber = 0;
+});
+
+subtraction.addEventListener('click', () => {
+  if (firstSave == 0) {
+    firstSave = firstNumber;
+  } else {
+    firstSave = eq(firstNumber, firstSave, operation);
+  }
+  operation = 'subtraction';
+  calc.innerHTML += '-';
+
+  firstArray = [];
+});
+
+multiplication.addEventListener('click', () => {
+  if (firstSave == 0) {
+    firstSave = firstNumber;
+  } else {
+    firstSave = eq(firstNumber, firstSave, operation);
+  }
+  operation = 'multiplication';
+  calc.innerHTML += 'x';
+  firstArray = [];
 });
 
 division.addEventListener('click', () => {
@@ -57,40 +97,30 @@ division.addEventListener('click', () => {
   firstNumber = 0;
 });
 
-multiplication.addEventListener('click', () => {
-  operation = 'multiplication';
-  calc.innerHTML += 'x';
-  multNumber = firstNumber;
-  firstArray = [];
-  firstNumber = 0;
-});
-
-subtraction.addEventListener('click', () => {
-  operation = 'subtraction';
-  calc.innerHTML += '-';
-  secondNumber -= firstNumber;
-  firstArray = [];
-  firstNumber = 0;
-});
-
-addition.addEventListener('click', () => {
-  operation = 'addition';
-  calc.innerHTML += '+';
-  secondNumber += firstNumber;
-  firstArray = [];
-  firstNumber = 0;
-});
+let eq = (num1, num2, operation) => {
+  if (operation == 'addition') {
+    return num1 + num2;
+  }
+  if (operation == 'subtraction') {
+    return num2 - num1;
+  }
+  if (operation == 'multiplication') {
+    return num2 - num1;
+  }
+  if (operation == 'division') {
+    return num2 - num1;
+  }
+};
 
 equals.addEventListener('click', () => {
   if (operation == 'addition') {
-    secondNumber += firstNumber;
-    calc.innerHTML = secondNumber;
+    secondNumber = firstNumber;
+    calc.innerHTML = firstSave + firstNumber;
     firstNumber = 0;
   }
 
   if (operation == 'subtraction') {
-    secondNumber += firstNumber;
-    calc.innerHTML = secondNumber;
+    calc.innerHTML = firstSave - firstNumber;
     firstNumber = 0;
   }
 
@@ -102,12 +132,7 @@ equals.addEventListener('click', () => {
   }
 
   if (operation == 'multiplication') {
-    if (secondNumber == 0) {
-      secondNumber = firstNumber * multNumber;
-    } else {
-      secondNumber = secondNumber * firstNumber;
-    }
-    calc.innerHTML = secondNumber;
+    calc.innerHTML = firstSave * firstNumber;
     firstNumber = 0;
     multNumber = 0;
   }
