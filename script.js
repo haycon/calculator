@@ -16,13 +16,8 @@ window.addEventListener('click', () => {
 //Onclick for each number
 numbers.forEach((e) => e.addEventListener('click', display));
 
-//Adds number into variable when clicked
+//Adds number into variable and displays when clicked
 function display(e) {
-  /*   if (Number.isInteger(parseInt(e.toElement.innerHTML))) {
-  } else {
-  }
-  trying to store float numbers into array 
-  */
   if (Number.isInteger(parseInt(e.toElement.innerHTML))) {
     buttonValue = parseFloat(e.toElement.innerHTML);
 
@@ -50,6 +45,12 @@ clear.addEventListener('click', () => {
   num2 = 0;
   secondSave = 0;
   calc.innerHTML = '';
+});
+
+//Undo
+undo.addEventListener('click', () => {
+  num1 = Math.floor(num1 / 10);
+  calc.innerHTML = num1;
 });
 
 //Add
