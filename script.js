@@ -18,12 +18,28 @@ numbers.forEach((e) => e.addEventListener('click', display));
 
 //Adds number into variable when clicked
 function display(e) {
-  let buttonValue = parseFloat(e.path[0].value);
+  /*   if (Number.isInteger(parseInt(e.toElement.innerHTML))) {
+  } else {
+  }
+  trying to store float numbers into array 
+  */
+  if (Number.isInteger(parseInt(e.toElement.innerHTML))) {
+    buttonValue = parseFloat(e.toElement.innerHTML);
 
-  firstArray.push(buttonValue);
-  num1 = parseFloat(firstArray.join(''));
+    firstArray.push(buttonValue);
+    num1 = parseFloat(firstArray.join(''));
 
-  calc.innerHTML += buttonValue;
+    calc.innerHTML += buttonValue;
+  } else {
+    if (!firstArray.includes('.')) {
+      buttonValue = e.toElement.innerHTML;
+
+      firstArray.push(buttonValue);
+      num1 = parseFloat(firstArray.join(''));
+
+      calc.innerHTML += buttonValue;
+    }
+  }
 }
 
 //Clear
@@ -89,6 +105,10 @@ equals.addEventListener('click', () => {
 });
 
 let eq = (num1, num2, operation) => {
+  if (!num2) {
+    return num1;
+  }
+
   if (operation == 'addition') {
     return num1 + num2;
   }
@@ -96,9 +116,12 @@ let eq = (num1, num2, operation) => {
     return num2 - num1;
   }
   if (operation == 'multiplication') {
-    return num2 * num1;
+    return (num2 * num1).toFixed(5);
   }
   if (operation == 'division') {
-    return num2 / num1;
+    if (num1 === 0) {
+      return 'You tried to divide by 0';
+    }
+    return (num2 / num1).toFixed(5);
   }
 };

@@ -4,13 +4,20 @@ body {
 
 button {
   background-color: #50dec4;
+  border-radius: 20px;
+}
+
+#buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 #main-calculator {
   background-color: #5aecfa;
   margin: 10% auto;
-  width: 360px;
-  height: 550px;
+  width: 370px;
+  height: 640px;
   border: 3px solid #50de73;
   padding: 10px;
 }
@@ -20,7 +27,7 @@ button {
   border: 3px solid #50de73;
   border-radius: 10px;
   text-align: right;
-  margin: 20px;
+  margin: 20px 20px 0px 20px;
 }
 
 #calculation {
@@ -32,13 +39,27 @@ button {
   margin-right: 10px;
 }
 
+#multiplication {
+  font-size: 70px;
+}
+
+.lrg-btn {
+  text-align: center;
+  border: none;
+  font-size: 40px;
+  width: 150px;
+  height: 70px;
+  margin: 15px;
+  padding: 0;
+}
+
 .btn {
   text-align: center;
   border: none;
   font-size: 70px;
   width: 70px;
   height: 90px;
-  margin: 3px;
+  margin-bottom: 20px;
 }
 
 .numbers {
