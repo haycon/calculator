@@ -126,3 +126,36 @@ let eq = (num1, num2, operation) => {
     return (num2 / num1).toFixed(5);
   }
 };
+
+//Todo: Add functionality for + - /
+function display2(e) {
+  //Could be improved with Regexp
+  if (
+    Number.isInteger(parseInt(e.key)) ||
+    e.key === 'x' ||
+    e.key === '.' ||
+    e.key === '-' ||
+    e.key === '/'
+  ) {
+    //Improvement: Make a function and reuse it here
+    if (e.key === 'x') {
+      if (num2 == 0) {
+        num2 = num1;
+      } else {
+        num2 = eq(num1, num2, operation);
+      }
+      operation = 'multiplication';
+      calc.innerHTML += 'x';
+      firstArray = [];
+    } else {
+      buttonValue = parseFloat(e.key);
+
+      firstArray.push(buttonValue);
+      num1 = parseFloat(firstArray.join(''));
+
+      calc.innerHTML += buttonValue;
+    }
+  }
+}
+
+window.addEventListener('keydown', display2);
